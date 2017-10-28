@@ -1,4 +1,4 @@
-<script>
+
   // Initialize Firebase
   var config = {
     apiKey: "AIzaSyAypX9oN76rocVMGQHYiPj39q7S1jYi_bE",
@@ -12,50 +12,64 @@
 
   var database = firebase.database();
 
-  var employeeName=;
-  var role=;
-  var startDate=;
-  var monthlyRate=;
+  var monthsWorked=0;
+  var totalBilled =0;
 
-  var monthsWorked=;
-  var totalBilled =;
+  var rowNumber=0;
 
-$("button").on("click",function () {
-  employeeName = $("#name").val().trim();
-  role = $("#role").val().trim();
-  startDate = $("#date").val().trim();
-  monthlyRate = $("#rate").val().trim();
+  var input;
+
+
+$("#submit").on("click",function () {
+
+  var employeeName = $("#name").val().trim();
+  var role = $("#role").val().trim();
+  var startDate = $("#date").val().trim();
+  var monthlyRate = $("#rate").val().trim();
 
   console.log(employeeName);
   console.log(role);
   console.log(startDate);
+  console.log(monthlyRate);
 
   // Save the new employe info in Firebase
-    database.ref().psuh({
+    database.ref().push({
       name: employeeName,
       employeeRole: role,
       beginDate: startDate,
       payRate: monthlyRate
     });
 
+
   // Store the new high price and bidder name as a local variable (could have also used the Firebase variable)
     //highBidder = bidderName;
     //highPrice = parseInt(bidderPrice);
 
   // Change the HTML to reflect the new high price and bidder
-    var newName = $("#").text(employeeName);
-    var newRole = $("#").text(role);
-    var newDate = $("#").text(startDate);
-    var newRate = $("#").text(monthlyRate);
 
+  var tableRow = $("<tr>");
+  tableRow.attr("id", "row-" + rowNumber);
+  $("#main").append(tableRow);
 
-  //append the value list
+  input = [$("#name").val().trim(), $("#role").val().trim(), $("#date").val().trim(), $("#rate").val().trim()];
 
+  for (var i = 0; i < input.length; i++) {
+    var tableData = $("<td>");
+    tableData.text(input[i]);
+    $("#row-" + rowNumber).append(tableData);
+  }
+
+  rowNumber++;
+
+  console.log(rowNumber);
   
-})
+});
 
-</script>
+
 
 //totalBilled calculation
+//return monthlyRate*monthsWorked
 
 //monthsWorked calculation
+//var currentDate = new Date();
+//
