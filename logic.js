@@ -19,7 +19,6 @@
 
   var input;
 
-
 $("#submit").on("click",function () {
 
   var employeeName = $("#name").val().trim();
@@ -32,7 +31,7 @@ $("#submit").on("click",function () {
   console.log(startDate);
   console.log(monthlyRate);
 
-  // Save the new employe info in Firebase
+  // Save the new employe info in firebaseebase
     database.ref().push({
       name: employeeName,
       employeeRole: role,
@@ -40,18 +39,17 @@ $("#submit").on("click",function () {
       payRate: monthlyRate
     });
 
+  
+});
 
-  // Store the new high price and bidder name as a local variable (could have also used the Firebase variable)
-    //highBidder = bidderName;
-    //highPrice = parseInt(bidderPrice);
-
-  // Change the HTML to reflect the new high price and bidder
+database.ref().on("child_added", function(snapshot) {
 
   var tableRow = $("<tr>");
   tableRow.attr("id", "row-" + rowNumber);
   $("#main").append(tableRow);
 
-  input = [$("#name").val().trim(), $("#role").val().trim(), $("#date").val().trim(), $("#rate").val().trim()];
+
+  input = [snapshot.val().name, snapshot.val().employeeRole, snapshot.val().beginDate, snapshot.val().payRate];
 
   for (var i = 0; i < input.length; i++) {
     var tableData = $("<td>");
@@ -62,8 +60,10 @@ $("#submit").on("click",function () {
   rowNumber++;
 
   console.log(rowNumber);
-  
+
 });
+
+
 
 
 
