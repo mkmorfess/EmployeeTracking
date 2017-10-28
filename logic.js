@@ -12,8 +12,50 @@
 
   var database = firebase.database();
 
-  var employeename="";
-  var role="";
-  var startdate="";
+  var employeeName=;
+  var role=;
+  var startDate=;
+  var monthlyRate=;
+
+  var monthsWorked=;
+  var totalBilled =;
+
+$("button").on("click",function () {
+  employeeName = $("#name").val().trim();
+  role = $("#role").val().trim();
+  startDate = $("#date").val().trim();
+  monthlyRate = $("#rate").val().trim();
+
+  console.log(employeeName);
+  console.log(role);
+  console.log(startDate);
+
+  // Save the new employe info in Firebase
+    database.ref().psuh({
+      name: employeeName,
+      employeeRole: role,
+      beginDate: startDate,
+      payRate: monthlyRate
+    });
+
+  // Store the new high price and bidder name as a local variable (could have also used the Firebase variable)
+    //highBidder = bidderName;
+    //highPrice = parseInt(bidderPrice);
+
+  // Change the HTML to reflect the new high price and bidder
+    var newName = $("#").text(employeeName);
+    var newRole = $("#").text(role);
+    var newDate = $("#").text(startDate);
+    var newRate = $("#").text(monthlyRate);
+
+
+  //append the value list
+
   
+})
+
 </script>
+
+//totalBilled calculation
+
+//monthsWorked calculation
